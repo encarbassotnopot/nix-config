@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 
 {
+  # usar Lix (lix.systems)
   nixpkgs.overlays = [ (final: prev: {
     inherit (prev.lixPackageSets.stable)
       nixpkgs-review
@@ -12,8 +13,9 @@
       nix-fast-build
       colmena;
   }) ];
-
   nix.package = pkgs.lixPackageSets.stable.lix;
+  
+  # activar flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   imports =
