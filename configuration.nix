@@ -23,8 +23,14 @@
   ];
 
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    "${
+      builtins.fetchGit {
+        url = "https://github.com/NixOS/nixos-hardware.git";
+        rev = "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3";
+      }
+    }/framework/13-inch/amd-ai-300-series"
   ];
 
   # Bootloader.
@@ -57,6 +63,21 @@
   services.xserver.enable = true;
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.tailscale.enable = true;
+  services.fwupd.enable = true;
+
+  environment.gnome.excludePackages = with pkgs.gnome; [
+    pkgs.epiphany # web browser
+    pkgs.simple-scan # document scanner
+    pkgs.yelp # help viewer
+    pkgs.geary # email client
+    pkgs.seahorse # password manager
+    # these should be self explanatory
+    pkgs.gnome-contacts
+    pkgs.gnome-maps
+    pkgs.gnome-music
+    pkgs.gnome-weather
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
