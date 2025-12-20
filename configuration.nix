@@ -5,23 +5,27 @@
 { config, pkgs, ... }:
 
 {
-  # usar Lix (lix.systems)
-  nixpkgs.overlays = [ (final: prev: {
-    inherit (prev.lixPackageSets.stable)
-      nixpkgs-review
-      nix-eval-jobs
-      nix-fast-build
-      colmena;
-  }) ];
-  nix.package = pkgs.lixPackageSets.stable.lix;
-  
-  # activar flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.overlays = [
+    (final: prev: {
+      inherit (prev.lixPackageSets.stable)
+        nixpkgs-review
+        nix-eval-jobs
+        nix-fast-build
+        colmena
+        ;
+    })
+  ];
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  nix.package = pkgs.lixPackageSets.stable.lix;
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -83,14 +87,17 @@
   users.users.eina = {
     isNormalUser = true;
     description = "eina";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
- 	
+      home-manager
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -101,8 +108,7 @@
     neovim
     git
     wget
-    fish	
-    ghostty
+    fish
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
