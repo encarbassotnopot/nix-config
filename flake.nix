@@ -4,8 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/25.11";
     home-manager = {
-      #url = "github:nix-community/home-manager";
-      url = "/home/eina/Desktop/home-manager";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
