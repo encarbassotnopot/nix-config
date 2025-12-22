@@ -14,15 +14,19 @@
       pkgs.fortune
       pkgs.nixfmt-rfc-style
       pkgs.nur.repos.forkprince.helium-nightly
+      pkgs.zoxide
     ];
     stateVersion = "25.11";
   };
 
+  xdg.userDirs.createDirectories = true;
   programs = {
     home-manager.enable = true;
     ghostty.enable = true;
     ghostty.enableFishIntegration = true;
     vscode.enable = true;
+    zoxide.enable = true;
+    zoxide.enableFishIntegration = true;
 
     fish.preferAbbrs = true;
     git = {

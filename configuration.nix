@@ -65,13 +65,13 @@
   services.desktopManager.gnome.enable = true;
   services.tailscale.enable = true;
   services.fwupd.enable = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   environment.gnome.excludePackages = with pkgs.gnome; [
     pkgs.epiphany # web browser
     pkgs.simple-scan # document scanner
     pkgs.yelp # help viewer
     pkgs.geary # email client
-    pkgs.seahorse # password manager
     # these should be self explanatory
     pkgs.gnome-contacts
     pkgs.gnome-maps
@@ -119,9 +119,6 @@
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
