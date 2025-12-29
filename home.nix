@@ -15,6 +15,19 @@
       pkgs.nur.repos.forkprince.helium-nightly
       pkgs.unzip
       pkgs.jq
+      pkgs.gnome-tweaks
+      pkgs.protonplus
+      pkgs.gamescope
+      pkgs.qbittorrent
+      
+      # repacks de johncena141
+      pkgs.bubblewrap
+      pkgs.dwarfs
+      pkgs.fuse-overlayfs
+      pkgs.psmisc
+
+      pkgs.coppwr
+      pkgs.mangohud
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -36,6 +49,7 @@
     fzf.enable = true;
     bat.enable = true;
     neovim.enable = true;
+    lutris.enable = true;
 
     git = {
       enable = true;
