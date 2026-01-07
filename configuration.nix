@@ -24,13 +24,6 @@
 
   imports = [
     ./hardware-configuration.nix
-
-    "${
-      builtins.fetchGit {
-        url = "https://github.com/NixOS/nixos-hardware.git";
-        rev = "9154f4569b6cdfd3c595851a6ba51bfaa472d9f3";
-      }
-    }/framework/13-inch/amd-ai-300-series"
   ];
 
   # Bootloader.
@@ -111,6 +104,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     packages = with pkgs; [
       home-manager
@@ -119,6 +113,12 @@
 
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

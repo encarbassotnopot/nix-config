@@ -11,6 +11,7 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
@@ -19,6 +20,7 @@
       nixpkgs,
       home-manager,
       nur,
+      nixos-hardware,
       ...
     }:
     let
@@ -35,6 +37,7 @@
         inherit system;
         modules = [
           ./configuration.nix
+          nixos-hardware.nixosModules.framework-amd-ai-300-series
         ];
       };
       homeConfigurations.eina = home-manager.lib.homeManagerConfiguration {

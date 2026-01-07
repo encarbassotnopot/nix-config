@@ -10,24 +10,33 @@
     username = "eina";
     homeDirectory = "/home/eina";
     packages = with pkgs; [
-      pkgs.htop
-      pkgs.nixfmt-rfc-style
       pkgs.nur.repos.forkprince.helium-nightly
+      pkgs.yt-dlp
+      pkgs.libreoffice
+      pkgs.qbittorrent
+      pkgs.jetbrains.idea
+      pkgs.devenv
+
+      # utilitats del sistema
       pkgs.unzip
       pkgs.jq
+      pkgs.htop
       pkgs.gnome-tweaks
-      pkgs.protonplus
+      pkgs.coppwr
+      pkgs.openssl
+
+      # jocs
       pkgs.gamescope
-      pkgs.qbittorrent
-      
+      pkgs.protonplus
       # repacks de johncena141
       pkgs.bubblewrap
       pkgs.dwarfs
       pkgs.fuse-overlayfs
       pkgs.psmisc
 
-      pkgs.coppwr
-      pkgs.mangohud
+      # nix
+      pkgs.nil # lsp
+      pkgs.nixfmt-rfc-style
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -59,7 +68,7 @@
         pull.rebase = true;
         gpg.format = "ssh";
         user.signingkey = "~/.ssh/id_ed25519.pub";
-	commit.gpgsign = true;
+        commit.gpgsign = true;
       };
     };
   };
@@ -68,5 +77,6 @@
     pkgs:
     builtins.elem (lib.getName pkgs) [
       "vscode"
+      "idea"
     ];
 }
