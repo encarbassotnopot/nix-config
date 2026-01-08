@@ -14,8 +14,12 @@
       pkgs.yt-dlp
       pkgs.libreoffice
       pkgs.qbittorrent
+      
+      # desenvolupament
       pkgs.jetbrains.idea
       pkgs.devenv
+      pkgs.opentofu
+      pkgs.opentofu-ls
 
       # utilitats del sistema
       pkgs.unzip
@@ -23,6 +27,7 @@
       pkgs.htop
       pkgs.gnome-tweaks
       pkgs.coppwr
+      pkgs.usbutils
       pkgs.openssl
 
       # jocs
