@@ -14,12 +14,24 @@
       pkgs.yt-dlp
       pkgs.libreoffice
       pkgs.qbittorrent
-      
+      pkgs.signal-desktop
+      pkgs.pangolin-cli
+      pkgs.keepassxc
+      pkgs.veracrypt
+      pkgs.bleachbit
+      pkgs.android-tools
+      (tor-browser.override {
+        extraPrefs = ''
+          mkdir -p "$TBB_IN_STORE/TorBrowser/Data/Browser/.mozilla/native-messaging-hosts/"
+          ln -s "$out/lib/mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json" "$TBB_IN_STORE/TorBrowser/Data/Browser/.mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json"
+        '';
+      })
+
       # desenvolupament
       pkgs.jetbrains.idea
       pkgs.devenv
       pkgs.opentofu
-      pkgs.opentofu-ls
+      pkgs.tofu-ls
 
       # utilitats del sistema
       pkgs.unzip
@@ -41,7 +53,7 @@
 
       # nix
       pkgs.nil # lsp
-      pkgs.nixfmt-rfc-style
+      pkgs.nixfmt
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -74,6 +86,7 @@
         gpg.format = "ssh";
         user.signingkey = "~/.ssh/id_ed25519.pub";
         commit.gpgsign = true;
+        init.defaultBranch = "main";
       };
     };
   };
@@ -83,5 +96,6 @@
     builtins.elem (lib.getName pkgs) [
       "vscode"
       "idea"
+      "veracrypt"
     ];
 }

@@ -33,6 +33,10 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Fs support
+  boot.supportedFilesystems.exfat = true;
+  boot.supportedFilesystems.ntfs = true;
+
   networking.hostName = "tramuntana";
   networking.networkmanager.enable = true;
 
