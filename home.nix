@@ -10,16 +10,18 @@
     username = "eina";
     homeDirectory = "/home/eina";
     packages = with pkgs; [
-      pkgs.nur.repos.forkprince.helium-nightly
-      pkgs.yt-dlp
-      pkgs.libreoffice
-      pkgs.qbittorrent
-      pkgs.signal-desktop
-      pkgs.pangolin-cli
-      pkgs.keepassxc
-      pkgs.veracrypt
-      pkgs.bleachbit
-      pkgs.android-tools
+      nur.repos.forkprince.helium-nightly
+      yt-dlp
+      ffmpeg
+      libreoffice
+      qbittorrent
+      signal-desktop
+      keepassxc
+      veracrypt
+      bleachbit
+      android-tools
+      cachix
+      pangolin-cli
       (tor-browser.override {
         extraPrefs = ''
           mkdir -p "$TBB_IN_STORE/TorBrowser/Data/Browser/.mozilla/native-messaging-hosts/"
@@ -28,32 +30,32 @@
       })
 
       # desenvolupament
-      pkgs.jetbrains.idea
-      pkgs.devenv
-      pkgs.opentofu
-      pkgs.tofu-ls
+      jetbrains.idea
+      devenv
+      opentofu
+      tofu-ls
 
       # utilitats del sistema
-      pkgs.unzip
-      pkgs.jq
-      pkgs.htop
-      pkgs.gnome-tweaks
-      pkgs.coppwr
-      pkgs.usbutils
-      pkgs.openssl
+      unzip
+      jq
+      htop
+      gnome-tweaks
+      coppwr
+      usbutils
+      openssl
 
       # jocs
-      pkgs.gamescope
-      pkgs.protonplus
+      gamescope
+      protonplus
       # repacks de johncena141
-      pkgs.bubblewrap
-      pkgs.dwarfs
-      pkgs.fuse-overlayfs
-      pkgs.psmisc
+      bubblewrap
+      dwarfs
+      fuse-overlayfs
+      psmisc
 
       # nix
-      pkgs.nil # lsp
-      pkgs.nixfmt
+      nil # lsp
+      nixfmt
     ];
     sessionVariables = {
       EDITOR = "nvim";
