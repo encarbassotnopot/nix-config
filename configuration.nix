@@ -64,16 +64,16 @@
   services.fwupd.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
-  environment.gnome.excludePackages = with pkgs.gnome; [
-    pkgs.epiphany # web browser
-    pkgs.simple-scan # document scanner
-    pkgs.yelp # help viewer
-    pkgs.geary # email client
+  environment.gnome.excludePackages = with pkgs; [
+    epiphany # web browser
+    simple-scan # document scanner
+    yelp # help viewer
+    geary # email client
     # these should be self explanatory
-    pkgs.gnome-contacts
-    pkgs.gnome-maps
-    pkgs.gnome-music
-    pkgs.gnome-weather
+    gnome-contacts
+    gnome-maps
+    gnome-music
+    gnome-weather
   ];
 
   # Configure keymap in X11
@@ -91,7 +91,6 @@
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -138,9 +137,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
-  nix.extraOptions = ''
-    extra-substituters = https://devenv.cachix.org
-    extra-trusted-public-keys = devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=
-  '';
 }

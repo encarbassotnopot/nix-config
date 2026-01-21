@@ -20,7 +20,6 @@
       veracrypt
       bleachbit
       android-tools
-      cachix
       pangolin-cli
       (tor-browser.override {
         extraPrefs = ''
