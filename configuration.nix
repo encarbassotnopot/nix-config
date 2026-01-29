@@ -44,7 +44,7 @@
   time.timeZone = "Europe/Madrid";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_GB.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ca_ES.UTF-8";
     LC_IDENTIFICATION = "ca_ES.UTF-8";
@@ -70,6 +70,7 @@
     yelp # help viewer
     geary # email client
     # these should be self explanatory
+    gnome-console
     gnome-contacts
     gnome-maps
     gnome-music

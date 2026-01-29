@@ -21,12 +21,9 @@
       bleachbit
       android-tools
       pangolin-cli
-      (tor-browser.override {
-        extraPrefs = ''
-          mkdir -p "$TBB_IN_STORE/TorBrowser/Data/Browser/.mozilla/native-messaging-hosts/"
-          ln -s "$out/lib/mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json" "$TBB_IN_STORE/TorBrowser/Data/Browser/.mozilla/native-messaging-hosts/org.keepassxc.keepassxc_browser.json"
-        '';
-      })
+      mpv
+      tor-browser
+      gnome-feeds
 
       # desenvolupament
       jetbrains.idea
@@ -42,6 +39,7 @@
       coppwr
       usbutils
       openssl
+      desktop-file-utils
 
       # jocs
       gamescope
@@ -62,7 +60,16 @@
     stateVersion = "25.11";
   };
 
-  xdg.userDirs.createDirectories = true;
+  xdg = {
+    enable = true;
+    userDirs.createDirectories = true;
+    terminal-exec = {
+      enable = true;
+      settings = {
+        default = [ "com.mitchellh.ghostty.desktop" ];
+      };
+    };
+  };
 
   services.spotifyd.enable = true;
 
@@ -71,13 +78,19 @@
     ghostty.enable = true;
     vscode.enable = true;
     zoxide.enable = true;
-    fish.enable = true;
-    fish.preferAbbrs = true;
     fzf.enable = true;
     bat.enable = true;
     neovim.enable = true;
     lutris.enable = true;
 
+    fish = {
+      enable = true;
+      preferAbbrs = true;
+      shellAbbrs = {
+        hm = "home-manager";
+        gcl = "git clone";
+      };
+    };
     git = {
       enable = true;
       settings = {
