@@ -24,12 +24,18 @@
       mpv
       tor-browser
       gnome-feeds
+      widevine-cdm
+      age
+      gcr
+      gimp
+      virtualbox
 
       # desenvolupament
       jetbrains.idea
       devenv
       opentofu
       tofu-ls
+      qFlipper
 
       # utilitats del sistema
       unzip
@@ -44,25 +50,18 @@
       # jocs
       gamescope
       protonplus
-      # repacks de johncena141
-      bubblewrap
-      dwarfs
-      fuse-overlayfs
-      psmisc
 
       # nix
       nil # lsp
       nixfmt
     ];
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
     stateVersion = "25.11";
   };
 
   xdg = {
     enable = true;
     userDirs.createDirectories = true;
+
     terminal-exec = {
       enable = true;
       settings = {
@@ -71,17 +70,21 @@
     };
   };
 
-  services.spotifyd.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    pinentry.package = pkgs.pinentry-curses;
+  };
 
   programs = {
     home-manager.enable = true;
     ghostty.enable = true;
-    vscode.enable = true;
     zoxide.enable = true;
     fzf.enable = true;
     bat.enable = true;
     neovim.enable = true;
     lutris.enable = true;
+    gpg.enable = true;
+    direnv.enable = true;
 
     fish = {
       enable = true;
@@ -91,6 +94,17 @@
         gcl = "git clone";
       };
     };
+
+    zed-editor = {
+      enable = true;
+      userSettings = {
+        "disable_ai" = true;
+        "title_bar" = {
+          "show_sign_in" = false;
+        };
+      };
+    };
+
     git = {
       enable = true;
       settings = {
@@ -108,8 +122,8 @@
   nixpkgs.config.allowUnfreePredicate =
     pkgs:
     builtins.elem (lib.getName pkgs) [
-      "vscode"
       "idea"
       "veracrypt"
+      "widevine-cdm"
     ];
 }

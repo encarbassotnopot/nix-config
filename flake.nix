@@ -3,14 +3,17 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
@@ -28,7 +31,9 @@
       lib = nixpkgs.lib;
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [ nur.overlays.default ];
+        overlays = [
+          nur.overlays.default
+        ];
       };
 
     in
@@ -42,7 +47,9 @@
       };
       homeConfigurations.eina = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home.nix ];
+        modules = [
+          ./hm/home.nix
+        ];
       };
     };
 }

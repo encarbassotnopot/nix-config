@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   nixpkgs.overlays = [
@@ -16,7 +21,7 @@
     })
   ];
 
-  nix.package = pkgs.lixPackageSets.stable.lix;
+#  nix.package = pkgs.lixPackageSets.stable.lix;
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -36,6 +41,10 @@
   # Fs support
   boot.supportedFilesystems.exfat = true;
   boot.supportedFilesystems.ntfs = true;
+
+  systemd.settings.Manager.extraConfig = ''
+    DefaultTimeoutStopSec=15s
+  '';
 
   networking.hostName = "tramuntana";
   networking.networkmanager.enable = true;
@@ -62,6 +71,15 @@
   services.desktopManager.gnome.enable = true;
   services.tailscale.enable = true;
   services.fwupd.enable = true;
+  services.printing.drivers = [
+    pkgs.cups-brother-hll2350dw
+  ];
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "cups-brother-hll2350dw"
+    ];
+
   security.pam.services.gdm.enableGnomeKeyring = true;
 
   environment.gnome.excludePackages = with pkgs; [
@@ -102,6 +120,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "vboxusers"
     ];
     packages = with pkgs; [
       home-manager
@@ -116,6 +135,9 @@
     enable = true;
     setSocketVariable = true;
   };
+  virtualisation.virtualbox.host.enable = true;
+
+  hardware.flipperzero.enable = true;
 
   environment.systemPackages = with pkgs; [
     neovim
@@ -124,6 +146,10 @@
     fish
     bash
   ];
+
+  environment.variables = {
+    EDITOR = "nvim";
+  };
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
@@ -138,4 +164,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
+
+  nix.settings.trusted-users = [ "eina" ];
 }
